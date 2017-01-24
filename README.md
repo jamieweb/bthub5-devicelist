@@ -8,7 +8,7 @@ This script is not robust and has a very niche use. It only works with a BT Home
 
 By default, the file used for storing the known devices is .known-devices.txt (relative to the directory where you are running the script). Change this if you need to.
 
-The main command of the script that is used to download and format the BT Home Hub control panel page is messy and could likely be improved. BT really did make it as difficult as possible to scrape data from their control panel pages, since the majority of the source HTML for the page is contained within just one line.
+The main command of the script that is used to download and format the BT Home Hub control panel page is messy and could likely be improved. BT really did make it as difficult as possible to scrape data from their control panel pages, since the majority of the source HTML for the page is contained within just one line. I don't know if this is deliberate obfuscation or not.
 
 Keep in mind that I designed the script not to be read directly by a human, but rather to be used as an input for another program. See "Use Cases" as the bottom of this README file.
 
@@ -24,6 +24,8 @@ Keep in mind that I designed the script not to be read directly by a human, but 
 
 The script works by downloading the homepage of the router control panel, which has a table containing all of the devices connected to the network.
 
+No form of authentication is required since all of the information needed can be loaded directly from the homepage. There is no need to log into with an administrator password.
+
 Download and output the source HTML of the router control panel homepage.
 
     curl -s 192.168.1.254
@@ -32,7 +34,7 @@ Replace all less than signs with a newline character. This splits the messy sing
 
     tr "<" "\n"
     
-Filter the output to only lines containing this text. All of the data that we want is contained within cells like this.
+Filter the output to only lines containing this text. All of the data that is needed is contained within cells like this.
 
     grep "TD class=\"bt_border\" align=LEFT valign=MIDDLE width=\"2[35]%\">"
     
