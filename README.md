@@ -24,7 +24,7 @@ Keep in mind that I designed the script not to be read directly by a human, but 
 
 The script works by downloading the homepage of the router control panel, which has a table containing all of the devices connected to the network.
 
-1. **curl -s 192.168.1.254**
+    curl -s 192.168.1.254**
    * Download and output the source HTML of the router control panel homepage.
 2. **tr "<" "\n"**
    * Replace all less than signs with a newline character. This splits the messy single-lined table into multiple lines, making it much more manageable.
