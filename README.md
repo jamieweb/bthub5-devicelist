@@ -12,10 +12,10 @@ The main command of the script that is used to download and format the BT Home H
 
 ## Example Output:
 
-OfficeComputer_01:23:45:67:89:ab_192.168.1.2
-KitchenComputer_cd:ef:98:76:54:32_192.168.1.3
-AndroidDevice_56:78:9a:bc:de:f0_192.168.1.4
-iPhone_fe:dc:ba:98:76:54_192.168.1.5
+OfficeComputer_01:23:45:67:89:ab_192.168.1.2  
+KitchenComputer_cd:ef:98:76:54:32_192.168.1.3  
+AndroidDevice_56:78:9a:bc:de:f0_192.168.1.4  
+iPhone_fe:dc:ba:98:76:54_192.168.1.5  
 
 ## How does it work?
 
