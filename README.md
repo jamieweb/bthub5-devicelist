@@ -55,6 +55,20 @@ Replace the double dashes encapsulated by spaces with a newline character. This 
 Replace spaces with underscores. This is useful as it makes handling the data in an array much easier.
      
     tr ' ' '_'
+    
+The final output of the above is saved into the array "devices".
+
+Construct an array using the contents of file known-devices.txt. On first run, this will throw a file not found error.
+
+    mapfile -t known < known-devices.txt
+    
+Construct an array consisting any entires that are only contained within the arrays once. This will either be new devices, or devices that have previously been connected but currently are not.
+
+    diff=(`echo ${known[@]} ${devices[@]} | tr ' ' '\n' | sort | uniq -u`)
+
+Print out entries that are not present in the list of known devices. This will only be new/unknown devices (or devices that have changed configuration, such as a new hostname or IP address). This output is saved to the known-devices.txt file for use next time the script runs.
+
+    echo ${devices[@]} ${diff[@]} | tr ' ' '\n' | sort | uniq -D | uniq | tee -a known-devices.txt
 
 ## Use Cases:
 
