@@ -10,6 +10,8 @@ By default, the file used for storing the known devices is .known-devices.txt (r
 
 The main command of the script that is used to download and format the BT Home Hub control panel page is messy and could likely be improved. BT really did make it as difficult as possible to scrape data from their control panel pages, since the majority of the source HTML for the page is contained within just one line.
 
+Keep in mind that I designed the script not to be read directly by a human, but rather to be used as an input for another program. See "Use Cases" as the bottom of this README file.
+
 ## Example Output:
 
     jamie@box:~$ ./device-list.sh
