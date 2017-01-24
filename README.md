@@ -24,12 +24,13 @@ Keep in mind that I designed the script not to be read directly by a human, but 
 
 The script works by downloading the homepage of the router control panel, which has a table containing all of the devices connected to the network.
 
-    curl -s 192.168.1.254**
-   * Download and output the source HTML of the router control panel homepage.
-2. **tr "<" "\n"**
-   * Replace all less than signs with a newline character. This splits the messy single-lined table into multiple lines, making it much more manageable.
-3. **grep "TD class=\"bt_border\" align=LEFT valign=MIDDLE width=\"2[35]%\">"**
-   * Filter the output to only lines containing this text. All of the data that we want is contained within cells like this.
+Download and output the source HTML of the router control panel homepage.
+    curl -s 192.168.1.254
+Replace all less than signs with a newline character. This splits the messy single-lined table into multiple lines, making it much more manageable.
+    tr "<" "\n"
+Filter the output to only lines containing this text. All of the data that we want is contained within cells like this.
+    grep "TD class=\"bt_border\" align=LEFT valign=MIDDLE width=\"2[35]%\">"
+   * 
 4. **sed -e "s/^TD class=\"bt_border\" align=LEFT valign=MIDDLE width=\"2[35]%\">//; s/&nbsp;//; s/2.4 GHz Wireless:/2.4 GHz Wireless:\n/; s/5 GHz Wireless:/\n5 GHz Wireless:\n/; s/Ethernet:/Ethernet:\n/; s/USB:/\nUSB:\n/"**
    * Filter out unwanted text and add newline characters to the end of some lines.
 5. **grep -B 1 -A 1 [0123456789abcdef][0123456789abcdef]:[0123456789abcdef][0123456789abcdef]**
