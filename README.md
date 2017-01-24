@@ -26,49 +26,49 @@ The script works by downloading the homepage of the router control panel, which 
 
 No form of authentication is required since all of the information needed can be loaded directly from the homepage. There is no need to log into with an administrator password.
 
-Download and output the source HTML of the router control panel homepage.
+Download and output the source HTML of the router control panel homepage:
 
     curl -s 192.168.1.254
     
-Replace all less than signs with a newline character. This splits the messy single-lined table into multiple lines, making it much more manageable.
+Replace all less than signs with a newline character. This splits the messy single-lined table into multiple lines, making it much more manageable:
 
     tr "<" "\n"
     
-Filter the output to only lines containing this text. All of the data that is needed is contained within cells like this.
+Filter the output to only lines containing this text. All of the data that is needed is contained within cells like this:
 
     grep "TD class=\"bt_border\" align=LEFT valign=MIDDLE width=\"2[35]%\">"
     
-Filter out unwanted text and add newline characters to the end of some lines.
+Filter out unwanted text and add newline characters to the end of some lines:
     
     sed -e "s/^TD class=\"bt_border\" align=LEFT valign=MIDDLE width=\"2[35]%\">//; s/&nbsp;//; s/2.4 GHz Wireless:/2.4 GHz Wireless:\n/; s/5 GHz Wireless:/\n5 GHz Wireless:\n/; s/Ethernet:/Ethernet:\n/; s/USB:/\nUSB:\n/"
 
-Filter out lines containing MAC addresses, as well as the lines both before and after.
+Filter out lines containing MAC addresses, as well as the lines both before and after:
 
     grep -B 1 -A 1 [0123456789abcdef][0123456789abcdef]:[0123456789abcdef][0123456789abcdef]
 
-Replace all newline characters with a space. This results with the entire output been on one line.
+Replace all newline characters with a space. This results with the entire output been on one line:
 
     tr '\n' ' '
 
-Replace the double dashes encapsulated by spaces with a newline character. This results in each device entry having its own line.
+Replace the double dashes encapsulated by spaces with a newline character. This results in each device entry having its own line:
 
     sed -e s/" -- "/"\n"/g
      
-Replace spaces with underscores. This is useful as it makes handling the data in an array much easier.
+Replace spaces with underscores. This is useful as it makes handling the data in an array much easier:
      
     tr ' ' '_'
     
 The final output of the above is saved into the array "devices".
 
-Construct an array using the contents of file known-devices.txt. On first run, this will throw a file not found error.
+Construct an array using the contents of file known-devices.txt. On first run, this will throw a file not found error:
 
     mapfile -t known < known-devices.txt
     
-Construct an array consisting any entires that are only contained within the arrays once. This will either be new devices, or devices that have previously been connected but currently are not.
+Construct an array consisting any entires that are only contained within the arrays once. This will either be new devices, or devices that have previously been connected but currently are not:
 
     diff=(`echo ${known[@]} ${devices[@]} | tr ' ' '\n' | sort | uniq -u`)
 
-Print out entries that are not present in the list of known devices. This will only be new/unknown devices (or devices that have changed configuration, such as a new hostname or IP address). This output is saved to the known-devices.txt file for use next time the script runs.
+Print out entries that are not present in the list of known devices. This will only be new/unknown devices (or devices that have changed configuration, such as a new hostname or IP address). This output is saved to the known-devices.txt file for use next time the script runs:
 
     echo ${devices[@]} ${diff[@]} | tr ' ' '\n' | sort | uniq -D | uniq | tee -a known-devices.txt
 
