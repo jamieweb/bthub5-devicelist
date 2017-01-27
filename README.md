@@ -76,6 +76,6 @@ Print out entries that are not present in the list of known devices. This will o
 
 The output of this script could be put into an email and sent in order to be notified whenever a new device connects to your home network.
 
-You could also use it with the notify-send command if your Linux desktop supports it.
+You could also use it with the notify-send (or equivalent) command on your Linux desktop.
 
-Or just use it to keep a log of devices that connect to your network.
+Or write the output to a file to keep a log of devices that connect to your network.
