@@ -44,7 +44,7 @@ Filter out unwanted text and add newline characters to the end of some lines:
 
 Filter out lines containing MAC addresses, as well as the lines both before and after:
 
-    grep -B 1 -A 1 [0123456789abcdef][0123456789abcdef]:[0123456789abcdef][0123456789abcdef]
+    grep -B 1 -A 1 [0-9a-f][0-9a-f]:[0-9a-f][0-9a-f]
 
 Replace all newline characters with a space. This results with the entire output been on one line:
 
