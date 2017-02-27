@@ -78,4 +78,4 @@ The output of this script could be put into an email and sent in order to be not
 
 You could also use it with the notify-send (or equivalent) command on your Linux desktop.
 
-Or write the output to a file to keep a log of devices that connect to your network.
+Or write the output along with a timestamp to a file to keep a log of new devices that connect to your network.
