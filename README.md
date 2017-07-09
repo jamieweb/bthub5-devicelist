@@ -1,4 +1,4 @@
-# bthub5-devicelist
+# BT Home Hub 5 Device List
 
 A simple bash script to display a list of new/unknown devices connected to a BT Home Hub 5.
 
